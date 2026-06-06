@@ -1,0 +1,5 @@
+foo = x => {
+  innerResult = sum({ a = x b = 25 })
+}
+
+globalResult = foo(5)

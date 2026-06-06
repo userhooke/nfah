@@ -1,0 +1,10 @@
+x = 10
+
+f ==> x
+
+g ==> {
+  x = 20
+  fresult = f()
+}
+
+gresult = g()

@@ -1,0 +1,2 @@
+if true then a = 12 else a = 13
+if false then b = 12 else b = 13
