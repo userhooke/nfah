@@ -1,0 +1,68 @@
+keywords = [
+    "if"
+    "then"
+    "else"
+    "true"
+    "false"
+    "return"
+]
+
+/*
+    sourceCodeStr passed here is now owned by this function
+    to get it back, the function `for` must return it back
+    if caller tries to use sourceCodeStr, that was passed here, compiler will do clonning
+    so basically a function can't internally mutate an entity, that lives outside. Only return the mutated 
+
+    also a function always accepts only one param.
+        It could be a struct or an array or just a number or a string, but only one.
+
+    also instead of using public `for`, I can return a function
+        so this way calling this module will always return a new instance
+
+    also I need a way to somehow show the expected type of an input
+        or don't I? Just infer based on usage?
+        dome some spec testing like clojure?
+*/
+return sourceCodeStr => {
+    cursor = 0
+    
+    getNextToken ==> {
+        skipIgnored()
+
+        if not(hasMoreTokens()) then return {
+            error     = false
+            completed = true
+        }
+
+        ch = peek()
+
+        if any(
+            ch.is("{")
+            ch.is("}")
+            ch.is("(")
+            ch.is(")")
+            ch.is("[")
+            ch.is("]")
+            ch.is(".")
+        ) then {
+/* 
+            now I need to do cursor++ here
+            the question is how do I mutate it here?
+            shall I do like parent/self.cursor++ ?
+                or better explicitly pass it to a function
+                    how to do this syntactically?
+*/
+            // self.cursor = self.cursor.add(1)
+            // nonlocal cursor = cursor.add(1)
+            cursor.inc()
+            return {
+                error     = false
+                completed = false
+                type      = ch
+                value     = ch
+            }
+        }
+    }
+
+    peek = { offset = 0 } => sourceCodeStr.peek(cursor.add(offset))
+}

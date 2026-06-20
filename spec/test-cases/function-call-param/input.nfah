@@ -1,0 +1,2 @@
+foo = x => sum({ x 25 })
+result = foo(5)

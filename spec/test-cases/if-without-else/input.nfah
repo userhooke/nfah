@@ -1,0 +1,2 @@
+if true then a = 12
+if false then b = 12

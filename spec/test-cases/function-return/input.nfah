@@ -1,0 +1,15 @@
+// a: Number
+a = {
+    b = 120
+    return b
+}
+
+// min: Function(Number, Number)
+min = x => {
+    if less?({ x 10 }) 
+        then return 10 
+        else return x
+}
+
+// result: Number
+result = min(5)

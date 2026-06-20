@@ -1,0 +1,3 @@
+callbackFn = x => sum({ x 10 })
+fn = cb => cb(5)
+result = fn(callbackFn)

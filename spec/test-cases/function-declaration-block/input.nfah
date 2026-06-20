@@ -1,0 +1,6 @@
+foo = x => {
+  result = sum({
+    a = x
+    b = 23
+  })
+}
