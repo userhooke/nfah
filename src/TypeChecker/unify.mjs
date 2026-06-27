@@ -23,7 +23,17 @@ export function unify(left, right) {
   }
 
   if (left.kind === "Function") {
-    unify(left.paramType, right.paramType);
+    const leftHasParam = left.paramType !== null;
+    const rightHasParam = right.paramType !== null;
+
+    if (leftHasParam !== rightHasParam) {
+      throw new Error("Function arity mismatch");
+    }
+
+    if (leftHasParam) {
+      unify(left.paramType, right.paramType);
+    }
+
     unify(left.returnType, right.returnType);
     return left;
   }

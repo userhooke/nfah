@@ -1,0 +1,35 @@
+{
+  "name": "nfah-vscode",
+  "displayName": "nfah Language Support",
+  "description": "Minimal syntax highlighting for nfah files.",
+  "version": "0.0.1",
+  "publisher": "nfah",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "nfah",
+        "aliases": [
+          "NFAH",
+          "nfah"
+        ],
+        "extensions": [
+          ".nfah"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "nfah",
+        "scopeName": "source.nfah",
+        "path": "./syntaxes/nfah.tmLanguage.json"
+      }
+    ]
+  }
+}

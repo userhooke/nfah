@@ -7,21 +7,19 @@ keywords = [
     "return"
 ]
 
+punctuation = [
+    "{"
+    "}"
+    "("
+    ")"
+    "."
+]
+
 /*
-    sourceCodeStr passed here is now owned by this function
-    to get it back, the function `for` must return it back
-    if caller tries to use sourceCodeStr, that was passed here, compiler will do clonning
-    so basically a function can't internally mutate an entity, that lives outside. Only return the mutated 
+    a function always accepts only one param.
+        It could be a number or a string or a nested block structure or another function, but only one.
 
-    also a function always accepts only one param.
-        It could be a struct or an array or just a number or a string, but only one.
-
-    also instead of using public `for`, I can return a function
-        so this way calling this module will always return a new instance
-
-    also I need a way to somehow show the expected type of an input
-        or don't I? Just infer based on usage?
-        dome some spec testing like clojure?
+    return a function here means every call will create a new instance of this module
 */
 return sourceCodeStr => {
     cursor = 0
@@ -30,6 +28,7 @@ return sourceCodeStr => {
         skipIgnored()
 
         if not(hasMoreTokens()) then return {
+            // there're no exceptions, instead we return the error state block
             error     = false
             completed = true
         }
@@ -45,15 +44,19 @@ return sourceCodeStr => {
             ch.is("]")
             ch.is(".")
         ) then {
+
 /* 
-            now I need to do cursor++ here
-            the question is how do I mutate it here?
-            shall I do like parent/self.cursor++ ?
-                or better explicitly pass it to a function
-                    how to do this syntactically?
+            this will increment the value of cursor found in an outer scope
+                since `cursor` is a Number, every Number has built it methods, like `inc()`
+            but if we do it like
+                cursor = cursor + 1
+            this won't mutate the outer cursor, but create a local binding instead.
+                In order to mutate the outer binding, there is an implicit `outer` binding passed to every function
+                    it is a link to an outer environment
+                outer.cursor = outer.cursor + 1
+            but we can also do like
+                cursor.set('21')    
 */
-            // self.cursor = self.cursor.add(1)
-            // nonlocal cursor = cursor.add(1)
             cursor.inc()
             return {
                 error     = false
@@ -64,5 +67,6 @@ return sourceCodeStr => {
         }
     }
 
+    // this syntax is a js-like destructuring of an input + default values assigned
     peek = { offset = 0 } => sourceCodeStr.peek(cursor.add(offset))
 }

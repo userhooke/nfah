@@ -1,1 +1,1 @@
-export default (error) => false;
+export default (error) => "Type mismatch: Number vs Boolean";

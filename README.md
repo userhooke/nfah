@@ -250,11 +250,3 @@ callbackFn: Function(Number, Number)
 fn: Function(Function(Number, Number), Number)
 result: Number
 ```
-
-### Language choices
-
-- No function overloading.
-- No generic types.
-- No `undefined` or `null`.
-- No computed member access.
-- Functions take zero or one argument.

@@ -1,1 +1,1 @@
-export default (ast) => ast.body[2].left.valueType === "Number";
+export default (ast) => ast.body[2].inferredType.kind === "Number";
